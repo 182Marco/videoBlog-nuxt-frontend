@@ -13,15 +13,17 @@
 
 .IconMenuMobile {
     width: 24px;
-    height: 15px;
+    height: 20px;
     position: relative;
     cursor: pointer;
     &:hover {
       i:first-child {
-        animation: left-to-center 0.3s forwards;
+        transform: translate(-50%, -50%);
+        left: 50%;
       }
       i:last-child {
-        animation: right-to-center 0.3s forwards;
+        transform: translate(50%, -50%);
+        right: 50%;
       }
     }
     @media screen and (min-width: 876px) {
@@ -37,7 +39,8 @@
      border-radius: 50%;
      position: absolute;
      top: 50%;
-        transform: translate(0, -50%);
+     transition: all 0.3s;
+     transform: translate(0, -50%);
      &:first-child {
         left: 0;
      }
@@ -49,28 +52,6 @@
         right: 0;
      }
  }
-
-   @keyframes left-to-center {
-    0% {
-      transform: translate(0, -50%);
-      left: 0;
-    }
-    100% {
-      transform: translate(-50%, -50%);
-      left: 50%;
-    }
-  }
-
-   @keyframes right-to-center {
-    0% {
-      transform: translate(0, -50%);
-      right: 0;
-    }
-    100% {
-      transform: translate(50%, -50%);
-      right: 50%;
-    }
-  }
 
 
 </style>
