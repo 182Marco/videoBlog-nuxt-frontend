@@ -10,11 +10,16 @@ export default {
     meta: [
       { charset: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { hid: "description", name: "description", content: "" },
+      { hid: "Sito di Mirko Fasoli con esposizione dei lavori più importanti e contatti", name: "VideoBlog Mirko Fasoli", content: "Sito di Mirko Fasoli con esposizione dei lavori più importanti e contatti" },
       { name: "format-detection", content: "telephone=no" },
     ],
-    link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
+    link: [
+      { rel: "icon", type: "image/x-icon", href: "/kFavicon32.ico" },
+      { rel:"stylesheet", href:"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css", integrity:"sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==", crossorigin:"anonymous", referrerpolicy:"no-referrer" }
+     ],
   },
+
+
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
@@ -40,7 +45,8 @@ export default {
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
     // https://go.nuxtjs.dev/typescript
-    "@nuxt/typescript-build",
+    "@nuxt/typescript-build", 
+    "@nuxt/image"
   ],
 
   types: ["@types/node", "@nuxt/types", "@nuxtjs/axios"],

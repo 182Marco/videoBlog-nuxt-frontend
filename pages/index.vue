@@ -1,26 +1,31 @@
 <template>
-  <div class="container">
-    <h1>Works user view</h1>
-    <input
-      type="text"
-      placeholder="search a work"
-      @keyup="search"
-      v-model="searchedText"
-    />
-    <section v-if="!searched.length">
-      <div v-for="video in videos" :key="`v_${video.id}`">
-        <iframe :src="video.url">{{ video.title }}</iframe>
-        <h2>{{ video.title }}</h2>
-        <p>{{ video.credits }}</p>
-      </div>
-    </section>
-    <section v-else>
-      <div v-for="s in searched" :key="`s_${s.id}`">
-        <iframe :src="s.url">{{ s.title }}</iframe>
-        <h2>{{ s.title }}</h2>
-        <p>{{ s.credits }}</p>
-      </div>
-    </section>
+  <div class="work-page">
+    <div class="container">
+      <h1>Works user view</h1>
+      <input
+        type="text"
+        placeholder="search a work"
+        @keyup="search"
+        v-model="searchedText"
+      />
+      <section v-if="!hasSearched">
+        <div v-for="video in videos" :key="`v_${video.id}`">
+          <iframe :src="video.url">{{ video.title }}</iframe>
+          <h2>{{ video.title }}</h2>
+          <p>{{ video.credits }}</p>
+        </div>
+      </section>
+      <section v-else>
+        <div v-if="`${searched !== 'not found'}`">
+          <div v-for="s in searched" :key="`s_${s.id}`">
+            <iframe :src="s.url">{{ s.title }}</iframe>
+            <h2>{{ s.title }}</h2>
+            <p>{{ s.credits }}</p>
+          </div>
+        </div>
+        <div v-else>Nessun video ha un match con la ricerca</div>
+      </section>
+    </div>
   </div>
 </template>
 
@@ -33,14 +38,32 @@ export default Vue.extend({
   data: () => ({
     searched: [],
     searchedText: "",
+    hasSearched: false,
   }),
-
+  head: () => {
+  return {
+    title: 'Homepage sito regista Mirko Fasoli',
+    meta: [
+      {
+        hid: 'Homepage sito regista Mirko Fasoli',
+        name: 'Homepage sito regista Mirko Fasoli',
+        description: 'Esposizizone dei lavori principali',
+        content: 'Esposizizone dei lavori principali'
+      }
+    ]
+  }
+},
   async asyncData({ $axios }: any) {
-    const videos = await $axios.$get(`${process.env.BASE_URL}/api/getVideos`);
+    const videos = await $axios.$get(
+      `${process.env.BASE_URL}/api/getAllVideos`
+    );
     return { videos };
   },
   methods: {
     async search() {
+      this.hasSearched = true;
+      console.log(this.hasSearched);
+      console.log("this searched: ", this.searched);
       try {
         const res = await axios.get(
           `${process.env.BASE_URL}/api/getVideos/${this.searchedText}`
@@ -55,9 +78,18 @@ export default Vue.extend({
 </script>
 
 <style scoped lang="scss">
+
+ @import "~assets/scss/vars.scss";
+
+
+template {
+  background-color: $background;
+}
+
 h1,
 input {
   margin-bottom: 20px;
+  color: red;
 }
 h2 {
   font-size: 20px;

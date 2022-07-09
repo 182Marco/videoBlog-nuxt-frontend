@@ -1,0 +1,12 @@
+h1 {
+  margin-top: 40px;
+  color: #3fe3c4;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+.layout {
+  background-color: #141414;
+}/*# sourceMappingURL=globals.css.map */
