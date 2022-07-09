@@ -11,6 +11,8 @@
       <li><NuxtLink to="/about"><i>ABOUT</i></NuxtLink></li>
       <li><NuxtLink to="/contacts"><i>CONTACTS</i></NuxtLink></li>
     </ul>
+    <section>
+    <IconMenuMobile class="IconMenuMobile"/>
     <ul class="social-links">
       <li>
         <a href="https://www.instagram.com/mirko_fasoli/?hl=it" target="_blank">
@@ -23,6 +25,7 @@
         </a>
       </li>
     </ul>
+    </section>
   </nav>
 </template>
 
@@ -40,10 +43,19 @@ img {
   height: 50px;
   object-fit: contain;
 }
+section {
+    @include flex(row, flex-start);
+    .IconMenuMobile{
+      margin-right: 60px
+    }
+}
 ul {
   @include flex(row, flex-start);
   list-style: none;
   &.internal-links {
+    @media screen and (max-width: 875px) {
+      display: none;
+    }
     li {
       overflow: hidden;
     }
