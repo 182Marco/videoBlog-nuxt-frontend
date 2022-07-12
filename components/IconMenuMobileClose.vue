@@ -11,10 +11,11 @@
  @import "~assets/scss/vars.scss";
  @import "~assets/scss/utility.scss";
 
-.IconMenuMobile {
+.IconMenuMobileClose {
+    z-index: -10;
     width: 24px;
     height: 20px;
-    position: relative;
+    position: absolute;
     cursor: pointer;
     &:hover {
       i:first-child {
@@ -29,6 +30,10 @@
     @media screen and (min-width: 876px) {
       display: none;
     }
+}
+
+.IconMenuMobileClose.visible {
+   z-index: 10;
 }
 
  i {

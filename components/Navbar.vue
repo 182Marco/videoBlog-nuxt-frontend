@@ -12,13 +12,25 @@
       <li><NuxtLink to="/contacts"><i>CONTACTS</i></NuxtLink></li>
     </ul>
     <section>
-    <IconMenuMobile class="IconMenuMobile"/>
+    <section 
+      class="icon-menu-mobile" 
+      @click="IsMenuMobileOpen = !IsMenuMobileOpen"
+    >
+      <IconMenuMobileClose 
+        class="IconMenuMobileClose" 
+        :class="{visible : !IsMenuMobileOpen}"
+      />
+      <IconMenuMobileOpen 
+        class="IconMenuMobileOpen" 
+        :class="{visible : IsMenuMobileOpen}"
+      />
+    </section>
     <ul class="social-links">
       <li>
         <a href="https://www.instagram.com/mirko_fasoli/?hl=it" target="_blank">
           <i class="fa-brands fa-instagram"></i>
         </a>
-        </li>
+      </li>
       <li>
         <a href="https://vimeo.com/search?q=mirko%20fasoli" target="_blank">
           <i class="fa-brands fa-vimeo-square"></i>
@@ -26,8 +38,28 @@
       </li>
     </ul>
     </section>
+    <div class="menu-mobile"  :class="{visible : IsMenuMobileOpen}">
+      <ul>
+      <li><NuxtLink to="/"></NuxtLink></li>
+      <li><NuxtLink to="/about"></NuxtLink></li>
+      <li><NuxtLink to="/contacts"></NuxtLink></li>
+      </ul>
+    </div>
   </nav>
 </template>
+
+<script lang="ts">
+import Vue from "vue";
+
+export default Vue.extend({
+  name: "Navbar",
+  data: () => ({
+    IsMenuMobileOpen: false,
+  }),
+  methods: {
+  },
+});
+</script>
 
 <style scoped lang="scss">
 
@@ -35,6 +67,7 @@
  @import "~assets/scss/utility.scss";
 
 nav {
+  position: relative;
   padding: 30px 50px 15px;
   @include flex(row, space-between, flex-start);
 }
@@ -48,6 +81,20 @@ section {
     .IconMenuMobile{
       margin-right: 60px
     }
+}
+.icon-menu-mobile {
+  margin-right: 54px;
+  position: relative;
+  width: 24px;
+  height: 24px;
+  .IconMenuMobileClose,
+  .IconMenuMobileOpen {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%)
+  }
+
 }
 ul {
   @include flex(row, flex-start);
@@ -89,7 +136,7 @@ ul {
          top: 0;
          left: 0;
          @include flex(column, space-between);
-         transition: transform 0.2s;
+         transition: transform 0.3s;
          &:hover {
            transform: translateY(-50%);
          }
@@ -100,6 +147,7 @@ ul {
     }
   }
   &.social-links {
+    margin-bottom: 1px;
     li {
        &:not(:last-child) {
        margin-right: 32px;
@@ -119,6 +167,82 @@ ul {
 a {
   @include font(14px, 300, $white);
 }
+
+ @media screen and (max-width: 492px) {
+    nav {
+      padding: 20px;
+      align-items: center;
+    }
+    .icon-menu-mobile {
+      margin-right: 20px;
+    }
+    ul.social-links {
+      flex-direction: column;
+      li:not(:last-child) {
+          margin-right: 0;
+      }
+    }
+ }
+.menu-mobile {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  height: calc(100vh - 95px);
+  width: 100vw;
+  background-color: $background;
+  display: none;
+  &.visible {
+    @include flex();
+  }
+  ul {
+    @include flex(column, space-between);
+    width: calc(100% - 40px);
+    margin: 0 auto 30vw;
+    height: 200px;
+    li {
+      position: relative;
+      height: 60px;
+      overflow: hidden;
+      &:first-child {
+        width: 127px;
+        a::after {
+          animation: slideUp 0.25s ease-out forwards, fadeIn 0.5s ease-out forwards;
+          content: 'WORKS';
+         }    
+      }
+      &:nth-child(2) {
+        width: 127px;
+        a::after {
+          animation: slideUp 0.25s 0.2s ease-out forwards, fadeIn 0.5s 0.15s ease-out forwards;
+          content: 'ABOUT';
+        }    
+      }
+      &:last-child {
+        width: 184px;
+        a::after {
+          animation: slideUp 0.25s 0.4s ease-out forwards, fadeIn 0.5s 0.25s ease-out forwards;
+          content: 'CONTACTS';
+        }
+      }
+      a,
+      a::after {
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: block;
+      }
+      a {
+        width: 100%;
+        height: 82px;
+        font-size: 35px;
+        &::after {
+          height: 41px;
+          top: 100%;
+        }
+      }
+    }
+  }
+}  
 
 i {
   color: $white;
@@ -146,6 +270,7 @@ i {
     transform: rotate(0deg);
   }
 }
+
 @keyframes mouve {
   0% {
     transform: translate(0);
@@ -166,6 +291,28 @@ i {
     transform: translate(0);
   }
 }
+
+@keyframes slideUp {
+  0% {
+      top: 100%;
+  }
+  100% {
+      top: 0;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+      opacity: 0;
+  }
+  70% {
+      opacity: 0.3;
+  }
+  100% {
+      opacity: 1;
+  }
+}
+
 </style>
 
 
