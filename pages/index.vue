@@ -55,7 +55,7 @@ export default Vue.extend({
 },
   async asyncData({ $axios }: any) {
     const videos = await $axios.$get(
-      `${process.env.BASE_URL}/api/getAllVideos`
+      `${process.env.BASE_URL}/api/getVideos`
     );
     return { videos };
   },
