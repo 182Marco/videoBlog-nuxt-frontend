@@ -1,51 +1,62 @@
 <template>
-  <nav>
-    <nuxt-img
-      src="mrk.png"
-      alt="Fasoli brand logo"
-      format="webp"
-      sizes="xl:300px xs:100px"
-    />
-    <ul class="internal-links">
-      <li><NuxtLink to="/"><i>WORKS</i></NuxtLink></li>
-      <li><NuxtLink to="/about"><i>ABOUT</i></NuxtLink></li>
-      <li><NuxtLink to="/contacts"><i>CONTACTS</i></NuxtLink></li>
-    </ul>
-    <section>
-    <section 
-      class="icon-menu-mobile" 
-      @click="IsMenuMobileOpen = !IsMenuMobileOpen"
-    >
-      <IconMenuMobileClose 
-        class="IconMenuMobileClose" 
-        :class="{visible : !IsMenuMobileOpen}"
+  <div>
+    <nav>
+      <nuxt-img
+        src="mrk.png"
+        alt="Fasoli brand logo"
+        format="webp"
+        sizes="xl:300px xs:100px"
       />
-      <IconMenuMobileOpen 
-        class="IconMenuMobileOpen" 
-        :class="{visible : IsMenuMobileOpen}"
-      />
-    </section>
-    <ul class="social-links">
-      <li>
-        <a href="https://www.instagram.com/mirko_fasoli/?hl=it" target="_blank">
-          <i class="fa-brands fa-instagram"></i>
-        </a>
-      </li>
-      <li>
-        <a href="https://vimeo.com/search?q=mirko%20fasoli" target="_blank">
-          <i class="fa-brands fa-vimeo-square"></i>
-        </a>
-      </li>
-    </ul>
-    </section>
-    <div class="menu-mobile"  :class="{visible : IsMenuMobileOpen}">
+      <ul class="internal-links">
+        <li>
+          <NuxtLink to="/"><i>WORKS</i></NuxtLink>
+        </li>
+        <li>
+          <NuxtLink to="/about"><i>ABOUT</i></NuxtLink>
+        </li>
+        <li>
+          <NuxtLink to="/contacts"><i>CONTACTS</i></NuxtLink>
+        </li>
+      </ul>
+      <section>
+        <section
+          class="icon-menu-mobile"
+          @click="IsMenuMobileOpen = !IsMenuMobileOpen"
+        >
+          <IconMenuMobileClose
+            class="IconMenuMobileClose"
+            :class="{ visible: !IsMenuMobileOpen }"
+          />
+          <IconMenuMobileOpen
+            class="IconMenuMobileOpen"
+            :class="{ visible: IsMenuMobileOpen }"
+          />
+        </section>
+        <ul class="social-links">
+          <li>
+            <a
+              href="https://www.instagram.com/mirko_fasoli/?hl=it"
+              target="_blank"
+            >
+              <i class="fa-brands fa-instagram"></i>
+            </a>
+          </li>
+          <li>
+            <a href="https://vimeo.com/search?q=mirko%20fasoli" target="_blank">
+              <i class="fa-brands fa-vimeo-square"></i>
+            </a>
+          </li>
+        </ul>
+      </section>
+    </nav>
+    <div class="menu-mobile" :class="{ visible: IsMenuMobileOpen }">
       <ul>
-      <li><NuxtLink to="/"></NuxtLink></li>
-      <li><NuxtLink to="/about"></NuxtLink></li>
-      <li><NuxtLink to="/contacts"></NuxtLink></li>
+        <li><NuxtLink to="/"></NuxtLink></li>
+        <li><NuxtLink to="/about"></NuxtLink></li>
+        <li><NuxtLink to="/contacts"></NuxtLink></li>
       </ul>
     </div>
-  </nav>
+  </div>
 </template>
 
 <script lang="ts">
@@ -67,7 +78,11 @@ export default Vue.extend({
  @import "~assets/scss/utility.scss";
 
 nav {
-  position: relative;
+  z-index: 9;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100vw;
   padding: 30px 50px 15px;
   @include flex(row, space-between, flex-start);
 }
@@ -94,7 +109,12 @@ section {
     left: 50%;
     transform: translate(-50%, -50%)
   }
-
+  .IconMenuMobileClose {
+    display: none;
+    &.visible {
+      display: flex;
+    }
+  }
 }
 ul {
   @include flex(row, flex-start);
@@ -185,9 +205,9 @@ a {
  }
 .menu-mobile {
   position: fixed;
-  bottom: 0;
+  top: 0;
   left: 0;
-  height: calc(100vh - 95px);
+  height: 100vh;
   width: 100vw;
   background-color: $background;
   display: none;

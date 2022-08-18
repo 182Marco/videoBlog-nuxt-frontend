@@ -1,5 +1,5 @@
 <template>
-  <div class="work-page">
+  <div class="work">
     <div class="container">
       <h1>Works user view</h1>
       <input
@@ -84,6 +84,10 @@ export default Vue.extend({
 
 template {
   background-color: $background;
+}
+
+.work {
+  padding-top: 150px;
 }
 
 h1,
