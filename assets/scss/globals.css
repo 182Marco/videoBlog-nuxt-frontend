@@ -1,5 +1,18 @@
 h1 {
-  color: #3fe3c4;
+  font-weight: 300;
+  font-size: 54px;
+  text-align: center;
+  padding: 240px 0 100px;
+}
+@media screen and (max-width: 850px) {
+  h1 {
+    padding: 180px 0 80px;
+  }
+}
+@media screen and (max-width: 550px) {
+  h1 {
+    padding: 150px 0 50px;
+  }
 }
 
 button:disabled {

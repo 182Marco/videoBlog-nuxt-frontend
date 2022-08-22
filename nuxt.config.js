@@ -44,10 +44,17 @@ export default {
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
-    // https://go.nuxtjs.dev/typescript
     "@nuxt/typescript-build", 
-    "@nuxt/image"
+    "@nuxt/image",
+    "@nuxtjs/fontawesome",
   ],
+  fontawesome: {
+    component: 'fa',
+    icons: {
+      solid: ['faEnvelope'],
+      brands: [],
+    }
+  },
 
   types: ["@types/node", "@nuxt/types", "@nuxtjs/axios"],
 
@@ -59,7 +66,10 @@ export default {
 
   // Modules: https://go.nuxtjs.dev/config-modules
 
-  modules: ["@nuxtjs/axios", "@nuxtjs/dotenv"],
+  modules: [
+    "@nuxtjs/axios",
+    "@nuxtjs/dotenv",
+  ],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},

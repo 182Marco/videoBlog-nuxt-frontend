@@ -67,18 +67,21 @@ export default Vue.extend({
   data: () => ({
     IsMenuMobileOpen: false,
   }),
-  methods: {
+  watch: {
+    $route() {
+      this.IsMenuMobileOpen = false;
+    },
   },
+  methods: {},
 });
 </script>
 
 <style scoped lang="scss">
-
- @import "~assets/scss/vars.scss";
- @import "~assets/scss/utility.scss";
+@import "~assets/scss/vars.scss";
+@import "~assets/scss/utility.scss";
 
 nav {
-  z-index: 9;
+  z-index: 2;
   position: fixed;
   left: 0;
   top: 0;
@@ -92,10 +95,10 @@ img {
   object-fit: contain;
 }
 section {
-    @include flex(row, flex-start);
-    .IconMenuMobile{
-      margin-right: 60px
-    }
+  @include flex(row, flex-start);
+  .IconMenuMobile {
+    margin-right: 60px;
+  }
 }
 .icon-menu-mobile {
   margin-right: 54px;
@@ -107,7 +110,7 @@ section {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%)
+    transform: translate(-50%, -50%);
   }
   .IconMenuMobileClose {
     display: none;
@@ -126,7 +129,8 @@ ul {
     li {
       overflow: hidden;
     }
-    li, a {
+    li,
+    a {
       height: 18.5px;
     }
     li {
@@ -134,76 +138,77 @@ ul {
       width: 50px;
       &:first-child {
         i::after {
-           content: 'WORKS';
+          content: "WORKS";
         }
       }
       &:nth-child(2) {
         i::after {
-           content: 'ABOUT';
+          content: "ABOUT";
         }
       }
       &:last-child {
         width: 74px;
         i::after {
-           content: 'CONTACTS';
+          content: "CONTACTS";
         }
       }
-       i {
-         font-style: normal;
-         font-size: 14px;
-         height: 35px;
-         position: absolute;
-         top: 0;
-         left: 0;
-         @include flex(column, space-between);
-         transition: transform 0.3s;
-         &:hover {
-           transform: translateY(-50%);
-         }
-       }
-       &:not(:last-child) {
-       margin-right: 70px;
-     }
+      i {
+        font-style: normal;
+        font-size: 14px;
+        height: 35px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        @include flex(column, space-between);
+        transition: transform 0.3s;
+        &:hover {
+          transform: translateY(-50%);
+        }
+      }
+      &:not(:last-child) {
+        margin-right: 70px;
+      }
     }
   }
   &.social-links {
     margin-bottom: 1px;
     li {
-       &:not(:last-child) {
-       margin-right: 32px;
-       a {
-         padding: 7px;
-       }
-     }
-       &:hover {
-       animation: mouve 3s;
+      &:not(:last-child) {
+        margin-right: 32px;
+        a {
+          padding: 7px;
+        }
+      }
+      &:hover {
+        animation: mouve 3s;
       }
     }
   }
   &:last-child {
-    @include flex(row, space-between)
+    @include flex(row, space-between);
   }
 }
 a {
   @include font(14px, 300, $white);
 }
 
- @media screen and (max-width: 492px) {
-    nav {
-      padding: 20px;
-      align-items: center;
+@media screen and (max-width: 492px) {
+  nav {
+    padding: 20px;
+    align-items: center;
+  }
+  .icon-menu-mobile {
+    margin-right: 20px;
+  }
+  ul.social-links {
+    flex-direction: column;
+    li:not(:last-child) {
+      margin-right: 0;
     }
-    .icon-menu-mobile {
-      margin-right: 20px;
-    }
-    ul.social-links {
-      flex-direction: column;
-      li:not(:last-child) {
-          margin-right: 0;
-      }
-    }
- }
+  }
+}
 .menu-mobile {
+  z-index: 1;
   position: fixed;
   top: 0;
   left: 0;
@@ -217,7 +222,7 @@ a {
   ul {
     @include flex(column, space-between);
     width: calc(100% - 40px);
-    margin: 0 auto 30vw;
+    margin: 0 auto;
     height: 200px;
     li {
       position: relative;
@@ -226,22 +231,25 @@ a {
       &:first-child {
         width: 127px;
         a::after {
-          animation: slideUp 0.25s ease-out forwards, fadeIn 0.5s ease-out forwards;
-          content: 'WORKS';
-         }    
+          animation: slideUp 0.25s ease-out forwards,
+            fadeIn 0.5s ease-out forwards;
+          content: "WORKS";
+        }
       }
       &:nth-child(2) {
         width: 127px;
         a::after {
-          animation: slideUp 0.25s 0.2s ease-out forwards, fadeIn 0.5s 0.15s ease-out forwards;
-          content: 'ABOUT';
-        }    
+          animation: slideUp 0.25s 0.2s ease-out forwards,
+            fadeIn 0.5s 0.15s ease-out forwards;
+          content: "ABOUT";
+        }
       }
       &:last-child {
         width: 184px;
         a::after {
-          animation: slideUp 0.25s 0.4s ease-out forwards, fadeIn 0.5s 0.25s ease-out forwards;
-          content: 'CONTACTS';
+          animation: slideUp 0.25s 0.4s ease-out forwards,
+            fadeIn 0.5s 0.25s ease-out forwards;
+          content: "CONTACTS";
         }
       }
       a,
@@ -262,7 +270,7 @@ a {
       }
     }
   }
-}  
+}
 
 i {
   color: $white;
@@ -314,25 +322,22 @@ i {
 
 @keyframes slideUp {
   0% {
-      top: 100%;
+    top: 100%;
   }
   100% {
-      top: 0;
+    top: 0;
   }
 }
 
 @keyframes fadeIn {
   0% {
-      opacity: 0;
+    opacity: 0;
   }
   70% {
-      opacity: 0.3;
+    opacity: 0.3;
   }
   100% {
-      opacity: 1;
+    opacity: 1;
   }
 }
-
 </style>
-
-

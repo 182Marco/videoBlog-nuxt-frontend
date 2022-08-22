@@ -1,7 +1,16 @@
 @import "./vars.scss";
 
 h1 {
-  color: $brand;
+  font-weight: 300;
+  font-size: 54px;
+  text-align: center;
+  padding: 240px 0 100px;
+  @media screen and (max-width: 850px) {
+    padding: 180px 0 80px;
+  }
+  @media screen and (max-width: 550px) {
+    padding: 150px 0 50px;
+  }
 }
 
 button:disabled {

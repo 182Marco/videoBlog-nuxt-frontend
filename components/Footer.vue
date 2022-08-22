@@ -10,6 +10,6 @@ footer {
 }
 h4 {
   text-align: center;
-  margin-bottom: 20px;
+  padding-bottom: 20px;
 }
 </style>
