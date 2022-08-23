@@ -3,7 +3,7 @@
     <h1>About</h1>
     <i @click="en = true">🇬🇧</i><i @click="en = false">🇮🇹</i>
     <p v-if="en">
-      I'm a filmmaker skilled in Digital contents and short docus for
+      I'm a filmmaker skilled in Digital Contents and short docus for
       advertising and fashion industry.<br />
       Born in Milan in 1990, since I was a kid I developed a more and more
       consistent interest and passion in cinema movies and production.<br />

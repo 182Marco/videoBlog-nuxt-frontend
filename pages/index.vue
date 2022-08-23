@@ -12,10 +12,8 @@
         v-model="searchedText"
     /></i>
     <section v-if="!searchedText">
-      <figure v-for="video in videos" :key="`v_${video.id}`">
-        <iframe :src="video.url" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen>{{ video.title }}</iframe>
-        <h2>{{ video.title }}</h2>
-        <p>{{ video.credits }}</p>
+      <figure v-for="category in categories" :key="`v_${category.id}`">
+        <NuxtLink :to="`/works/${category.slug}`"><h2>{{ category.name }}</h2></NuxtLink>  
       </figure>
     </section>
     <section v-else>
@@ -36,6 +34,10 @@ import Vue from "vue";
 import axios from "axios";
 
 export default Vue.extend({
+    async asyncData({ $axios }: any) {
+    const categories = await $axios.$get(`${process.env.BASE_URL}/api/getCategories`);
+    return { categories };
+  },
   name: "IndexPage",
   data: () => ({
     searched: [],
@@ -55,9 +57,7 @@ export default Vue.extend({
       ],
     };
   },
-  async asyncData({ $axios }: any) {
-    const videos = await $axios.$get(`${process.env.BASE_URL}/api/getVideos`);
-    return { videos };
+  created() {
   },
   methods: {
     async search() {
@@ -68,6 +68,15 @@ export default Vue.extend({
         this.searched = res.data;
       } catch (er) {
         console.log("this is the error calling getVideos/${searched}", er);
+      }
+    },
+    async getCategoies() {
+      try {
+        const res = await axios.get(
+          `${process.env.BASE_URL}/api/getCategories/`
+        );
+      } catch (er) {
+        console.log("this is the error calling categories", er);
       }
     },
     putFocus() {
@@ -127,12 +136,6 @@ section {
   @include flex(column, flex-start);
   width: 100%;
   figure {
-    position: relative;
-    overflow: hidden;
-    width: 100%;
-    padding-top: calc(56.25% - 6px); /* 16:9 Aspect Ratio (divide 9 by 16 = 0.5625) */
-    margin-bottom: 60px;
-    transition: all 0.3s ease-in;
     &:hover {
       transform: scale(1.01);
     }
