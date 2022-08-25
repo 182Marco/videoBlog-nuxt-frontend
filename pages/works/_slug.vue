@@ -3,14 +3,15 @@
     <header>
       <h1 v-if="pageCategory">{{ pageCategory }}</h1>
     </header>
-    <main v-for="(videolist, i) in videos" :key="i">
+    <div v-for="(videolist, i) in videos" :key="i">
       <ul
         v-if="videolist.length"
-        :class="`ratio${videolist[0].aspect_ratio.replace(':', '-')}`"
-        :style="{ gridTemplateColumns: `repeat(${videolist.length}, 1fr)` }"
+        :style="{
+          gridTemplateColumns: `repeat(${videolist.length}, 1fr)`,
+        }"
       >
         <li v-for="video in videolist" :key="`_${video.id}`">
-          <figure>
+          <figure :style="{ paddingTop: getPaddingTop(video.aspect_ratio) }">
             <iframe
               :src="video.url"
               frameborder="0"
@@ -20,13 +21,12 @@
           </figure>
         </li>
       </ul>
-    </main>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
-// import axios from "axios";
 
 export interface Category {
   slug: string;
@@ -44,7 +44,7 @@ export interface Video {
 
 export default Vue.extend({
   name: "WorksSlugPage",
-  async asyncData({ params, $axios }: any) {
+  async asyncData({ params }) {
     const slug = params.slug;
     return { slug };
   },
@@ -89,7 +89,6 @@ export default Vue.extend({
         this.getVideos(`4:5`),
         this.getVideos(`1:1`),
       ];
-      console.log(this.videos);
     },
   },
   mounted() {},
@@ -110,6 +109,11 @@ export default Vue.extend({
         v => v.aspect_ratio == ratio
       );
       return videos;
+    },
+    getPaddingTop(ratio: string) {
+      const numerator = parseInt(ratio.split(":")[0]);
+      const denominator = parseInt(ratio.split(":")[1]);
+      return `${(denominator / numerator) * 100}%`;
     },
   },
 });
@@ -169,30 +173,5 @@ iframe {
   right: 0;
   width: 100%;
   height: 100%;
-}
-
-.ratio16-9 {
-  figure {
-    padding-top: 56.25%; /* 16:9 Aspect Ratio (divide 9 by 16 = 0.5625) */
-  }
-}
-
-.ratio9-16 {
-  figure {
-    // height: 0;
-    padding-top: 177%; /* 9:16 Aspect Ratio */
-  }
-}
-
-.ratio4-5 {
-  figure {
-    padding-top: 125%; /* 8:5 Aspect Ratio */
-  }
-}
-
-.ratio1-1 {
-  figure {
-    padding-top: 100%;
-  }
 }
 </style>
