@@ -3,70 +3,24 @@
     <header>
       <h1 v-if="pageCategory">{{ pageCategory }}</h1>
     </header>
-    <ul
-      v-if="videos16_9.length"
-      class="ratio16-9"
-      :style="{ gridTemplateColumns: `repeat(${videos16_9.length}, 1fr)` }"
-    >
-      <li v-for="video in videos16_9" :key="`_${video.id}`">
-        <figure>
-          <iframe
-            :src="video.url"
-            frameborder="0"
-            allow="autoplay; fullscreen; picture-in-picture"
-            allowfullscreen
-          ></iframe>
-        </figure>
-      </li>
-    </ul>
-    <ul
-      v-if="videos9_16.length"
-      class="ratio9-16"
-      :style="{ gridTemplateColumns: `repeat(${videos9_16.length}, 1fr)` }"
-    >
-      <li v-for="video in videos9_16" :key="`_${video.id}`">
-        <figure>
-          <iframe
-            :src="video.url"
-            frameborder="0"
-            allow="autoplay; fullscreen; picture-in-picture"
-            allowfullscreen
-          ></iframe>
-        </figure>
-      </li>
-    </ul>
-    <ul
-      v-if="videos4_5.length"
-      class="ratio4-5"
-      :style="{ gridTemplateColumns: `repeat(${videos4_5.length}, 1fr)`}"
-    >
-      <li v-for="video in videos4_5" :key="`__${video.id}`">
-        <figure>
-          <iframe
-            :src="video.url"
-            frameborder="0"
-            allow="autoplay; fullscreen; picture-in-picture"
-            allowfullscreen
-          ></iframe>
-        </figure>
-      </li>
-    </ul>
-    <ul
-      v-if="videos1_1.length"
-      class="ratio1-1"
-      :style="{ gridTemplateColumns: `repeat(${videos1_1.length}, 1fr)` }"
-    >
-      <li v-for="video in videos1_1" :key="`_${video.id}`">
-        <figure>
-          <iframe
-            :src="video.url"
-            frameborder="0"
-            allow="autoplay; fullscreen; picture-in-picture"
-            allowfullscreen
-          ></iframe>
-        </figure>
-      </li>
-    </ul>
+    <main v-for="(videolist, i) in videos" :key="i">
+      <ul
+        v-if="videolist.length"
+        :class="`ratio${videolist[0].aspect_ratio.replace(':', '-')}`"
+        :style="{ gridTemplateColumns: `repeat(${videolist.length}, 1fr)` }"
+      >
+        <li v-for="video in videolist" :key="`_${video.id}`">
+          <figure>
+            <iframe
+              :src="video.url"
+              frameborder="0"
+              allow="autoplay; fullscreen; picture-in-picture"
+              allowfullscreen
+            ></iframe>
+          </figure>
+        </li>
+      </ul>
+    </main>
   </div>
 </template>
 
@@ -110,10 +64,7 @@ export default Vue.extend({
   data() {
     return {
       categoryVideos: [] as Video[],
-      videos16_9: [] as Video[],
-      videos9_16: [] as Video[],
-      videos4_5: [] as Video[],
-      videos1_1: [] as Video[],
+      videos: [] as Video[][],
       categories: [] as Category[],
       ClientSideSlug: this.$route.params.slug,
       pageCategory: "",
@@ -132,10 +83,13 @@ export default Vue.extend({
   },
   watch: {
     categoryVideos() {
-      this.videos16_9 = this.getVideos(`16:9`);
-      this.videos9_16 = this.getVideos(`9:16`);
-      this.videos4_5 = this.getVideos(`4:5`);
-      this.videos1_1 = this.getVideos(`1:1`);
+      this.videos = [
+        this.getVideos(`16:9`),
+        this.getVideos(`9:16`),
+        this.getVideos(`4:5`),
+        this.getVideos(`1:1`),
+      ];
+      console.log(this.videos);
     },
   },
   mounted() {},
