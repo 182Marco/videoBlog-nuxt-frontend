@@ -9,6 +9,7 @@
 <style scoped lang="scss">
 
  @import "~assets/scss/vars.scss";
+ @import "~assets/scss/mixins.scss";
  @import "~assets/scss/utility.scss";
 
 .IconMenuMobileClose {

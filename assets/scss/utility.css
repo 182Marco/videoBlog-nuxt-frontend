@@ -12,4 +12,32 @@
   .container {
     width: calc(100% - 40px);
   }
+}
+
+.input-box {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.fa-magnifying-glass {
+  font-size: 25px;
+  cursor: pointer;
+  margin-right: 12px;
+}
+
+input {
+  width: 0;
+  padding: 0;
+  transition: all 0.3s;
+  border: 1px solid #141414;
+  font-size: 20px;
+  font-weight: 300;
+}
+input.visible {
+  border-color: #fff;
+  padding: 10px 20px;
+  width: 230px;
 }/*# sourceMappingURL=utility.css.map */
