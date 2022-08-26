@@ -126,6 +126,7 @@ export default Vue.extend({
 @import "~assets/scss/vars.scss";
 @import "~assets/scss/mixins.scss";
 @import "~assets/scss/utility.scss";
+@import "~assets/scss/animations.scss";
 
 h1 {
   height: 301px;
@@ -141,15 +142,6 @@ h1 {
 
 .container {
   min-height: 100vh;
-}
-
-@keyframes fade-in {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
 }
 
 ul {

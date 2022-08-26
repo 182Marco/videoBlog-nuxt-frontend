@@ -33,15 +33,16 @@ input:focus {
 }
 
 button {
-  background-color: transparent;
-  border: 1px solid $brand;
+  background-color: $brand;
+  border: 0;
+  color: $white;
   color: $brand;
   padding: 7px 15px;
   border-radius: 5px;
   transition: all 0.3s;
+  font-size: 20px;
   cursor: pointer;
   &:hover {
-    background-color: $brand;
-    color: $white;
+
   }
 }

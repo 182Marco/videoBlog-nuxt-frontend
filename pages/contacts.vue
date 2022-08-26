@@ -1,20 +1,29 @@
 <template>
-  <div class="container">
-    <h1>Contacts user view</h1>
-    <form @submit.prevent="postForm">
-      <input type="text" v-model="name" placeholder="nome" />
-      <div v-for="er in errors.name" :key="`er: ${er}`">{{ er }}</div>
-      <input type="email" v-model="email" placeholder="email" />
-      <div v-for="er in errors.email" :key="`er: ${er}`">{{ er }}</div>
-      <label for="msg">messaggio</label>
-      <textarea v-model="msg" id="msg" cols="30" rows="10"></textarea>
-      <div v-for="er in errors.email" :key="`er: ${er}`">{{ er }}</div>
-      <button type="submit" :disabled="sending">
-        {{ sending ? "inviando..." : "invia" }}
-      </button>
-      <h4 v-show="success">messaggio inviato correttamente</h4>
-    </form>
-  </div>
+  <main>
+    <div class="container">
+      <h1>Contacts</h1>
+      <form @submit.prevent="postForm">
+        <label for="name">NOME</label>
+        <input type="text" v-model="name" required />
+        <div v-for="er in errors.name" :key="`er: ${er}`">{{ er }}</div>
+        <label for="name">LA TUA EMAIL</label>
+        <input type="email" v-model="email" required />
+        <div v-for="er in errors.email" :key="`er: ${er}`">{{ er }}</div>
+        <label for="msg">MESSAGGIO</label>
+        <textarea
+          v-model="msg"
+          id="msg"
+          required
+          placeholder="Ciao Mirko..."
+        ></textarea>
+        <div v-for="er in errors.email" :key="`er: ${er}`">{{ er }}</div>
+        <button type="submit" :disabled="sending">
+          {{ sending ? "INVIANDO..." : "INVIA" }}
+        </button>
+        <h4 v-show="success">messaggio inviato correttamente</h4>
+      </form>
+    </div>
+  </main>
 </template>
 
 <script lang="ts">
@@ -61,4 +70,56 @@ export default Vue.extend({
 });
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+@import "~assets/scss/vars.scss";
+@import "~assets/scss/mixins.scss";
+@import "~assets/scss/utility.scss";
+@import "~assets/scss/animations.scss";
+
+main {
+  background-color: $white;
+  min-height: calc(100vh - 60px); // - footer mesure
+  * {
+    color: $background;
+  }
+  input,
+  textarea {
+    padding-left: 20px;
+  }
+}
+form {
+  padding-bottom: 60px;
+}
+label,
+button {
+  font-size: 16px;
+}
+label {
+  font-weight: 500;
+}
+
+input,
+textarea {
+  min-width: 100%;
+  margin: 5px 0 30px;
+  padding: 15px 20px;
+  font-size: 20px;
+}
+
+textarea {
+  height: 150px;
+}
+
+textarea:focus {
+  outline: none;
+  border-radius: 10px;
+}
+
+button {
+  color: $white;
+  font-weight: 600;
+  &:hover {
+    animation: tremble 0.4s;
+  }
+}
+</style>

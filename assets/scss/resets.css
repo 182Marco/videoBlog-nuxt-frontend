@@ -27,15 +27,13 @@ input:focus {
 }
 
 button {
-  background-color: transparent;
-  border: 1px solid #3fe3c4;
-  color: #3fe3c4;
+  background-color: #05AFCB;
+  border: 0;
+  color: #fff;
+  color: #05AFCB;
   padding: 7px 15px;
   border-radius: 5px;
   transition: all 0.3s;
+  font-size: 20px;
   cursor: pointer;
-}
-button:hover {
-  background-color: #3fe3c4;
-  color: #fff;
 }/*# sourceMappingURL=resets.css.map */

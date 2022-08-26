@@ -52,6 +52,11 @@ export default Vue.extend({
 </script>
 
 <style scoped lang="scss">
+@import "~assets/scss/vars.scss";
+@import "~assets/scss/mixins.scss";
+@import "~assets/scss/utility.scss";
+@import "~assets/scss/animations.scss";
+
 .container {
   min-height: 100vh;
 }
@@ -66,26 +71,6 @@ i {
   }
 }
 
-@keyframes bounce {
-  0% {
-    transform: scale(1, 1) translateY(0);
-  }
-  10% {
-    transform: scale(1.1, 0.9) translateY(0);
-  }
-  30% {
-    transform: scale(0.9, 1.1) translateY(-3px);
-  }
-  50% {
-    transform: scale(1.1, 0.95) translateY(0);
-  }
-  57% {
-    transform: scale(1, 1) translateY(0);
-  }
-  100% {
-    transform: scale(1, 1) translateY(0);
-  }
-}
 p {
   margin-top: 20px;
   font-size: 20px;

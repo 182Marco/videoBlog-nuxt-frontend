@@ -1,8 +1,12 @@
 <template>
-  <div>
+  <div :class="{ colorReverse: isColorReverse }">
     <nav>
       <nuxt-img
-        src="mrk.png"
+        :src="`${
+          isColorReverse && !isMenuMobileOpen
+            ? `/mrk-black.png`
+            : `/mrk-white.png`
+        }`"
         alt="Fasoli brand logo"
         format="webp"
         sizes="xl:300px xs:100px"
@@ -75,7 +79,20 @@ export default Vue.extend({
   data: () => ({
     isMenuMobileOpen: false,
     exitMobileMenuAnimate: false,
+    isColorReverse: false,
   }),
+  watch: {
+    $route() {
+      this.$route.name == "contacts"
+        ? (this.isColorReverse = true)
+        : (this.isColorReverse = false);
+    },
+  },
+  created() {
+    this.$route.name == "contacts"
+      ? (this.isColorReverse = true)
+      : (this.isColorReverse = false);
+  },
   methods: {
     //
     waitFor: (time: number) =>
@@ -99,6 +116,7 @@ export default Vue.extend({
 @import "~assets/scss/vars.scss";
 @import "~assets/scss/mixins.scss";
 @import "~assets/scss/utility.scss";
+@import "~assets/scss/animations.scss";
 
 nav {
   z-index: 2;
@@ -134,8 +152,10 @@ section {
   }
   .IconMenuMobileClose {
     display: none;
-    &.visible {
-      display: flex;
+    @media screen and (max-width: 875px) {
+      &.visible {
+        display: flex;
+      }
     }
   }
 }
@@ -208,7 +228,8 @@ ul {
   }
 }
 a {
-  @include font(14px, 300, $white);
+  font-size: 14px;
+  font-weight: 300;
 }
 
 @media screen and (max-width: 492px) {
@@ -303,92 +324,17 @@ a {
 }
 
 i {
-  color: $white;
   font-size: 12px;
   cursor: pointer;
 }
 
-@keyframes tremble {
-  0% {
-    transform: rotate(0deg);
+.colorReverse {
+  a,
+  i {
+    color: $background;
   }
-  20% {
-    transform: rotate(10px);
-  }
-  40% {
-    transform: rotate(-10px);
-  }
-  60% {
-    transform: rotate(9deg);
-  }
-  80% {
-    transform: rotate(-9deg);
-  }
-  100% {
-    transform: rotate(0deg);
-  }
-}
-
-@keyframes mouve {
-  0% {
-    transform: translate(0);
-  }
-  20% {
-    transform: translate(5px, 5px);
-  }
-  40% {
-    transform: translate(-5px, -5px);
-  }
-  60% {
-    transform: translate(5px, 5px);
-  }
-  80% {
-    transform: translate(-5px, 5px);
-  }
-  100% {
-    transform: translate(0);
-  }
-}
-
-@keyframes slideUp {
-  0% {
-    top: 100%;
-  }
-  100% {
-    top: 50%;
-    transform: translateY(-50%);
-  }
-}
-
-@keyframes slideUpMore {
-  0% {
-    bottom: 0;
-  }
-  100% {
-    bottom:  80px;
-  }
-}
-
-@keyframes fadeIn {
-  0% {
-    opacity: 0;
-  }
-  70% {
-    opacity: 0.3;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-@keyframes fadeOut {
-  0% {
-    opacity: 1;
-  }
-  30% {
-    opacity: 0.3;
-  }
-  100% {
-    opacity: 0;
+  .menu-mobile.visible i {
+    color: $white;
   }
 }
 </style>

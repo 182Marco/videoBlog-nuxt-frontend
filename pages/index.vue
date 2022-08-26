@@ -66,6 +66,7 @@ export default Vue.extend({
 @import "~assets/scss/vars.scss";
 @import "~assets/scss/mixins.scss";
 @import "~assets/scss/utility.scss";
+@import "~assets/scss/animations.scss";
 
 template {
   background-color: $background;

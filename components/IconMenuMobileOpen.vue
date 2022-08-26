@@ -13,6 +13,7 @@
  @import "~assets/scss/vars.scss";
  @import "~assets/scss/mixins.scss";
  @import "~assets/scss/utility.scss";
+ @import "~assets/scss/animations.scss";
 
  section {
    position: absolute;
@@ -50,16 +51,6 @@
    animation: lenghten 0.4s forwards;
     width: 24px;
  }
-
- @keyframes lenghten {
-  0% {
-    width: 5px;
-  }
-  100% {
-    width: 18px;
-  }
-}
-
 
 </style>
 
