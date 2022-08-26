@@ -4,17 +4,17 @@
       <h1>Contacts</h1>
       <form @submit.prevent="postForm">
         <label for="name">NOME</label>
-        <input type="text" v-model="name" />
+        <input type="text" v-model="name" required />
         <p>
           <span v-for="er in errors.name" :key="`er: ${er}`">{{ er }}</span>
         </p>
         <label for="name">LA TUA EMAIL</label>
-        <input type="email" v-model="email" />
+        <input type="email" v-model="email" required />
         <p>
           <span v-for="er in errors.email" :key="`er: ${er}`">{{ er }}</span>
         </p>
         <label for="msg">MESSAGGIO</label>
-        <textarea v-model="msg" id="msg" placeholder="Ciao Mirko..."></textarea>
+        <textarea v-model="msg" id="msg" placeholder="Ciao Mirko..." required></textarea>
         <p>
           <span v-for="er in errors.msg" :key="`er: ${er}`">{{ er }}</span>
         </p>
