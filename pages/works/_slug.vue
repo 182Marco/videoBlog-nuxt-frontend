@@ -1,8 +1,6 @@
 <template>
   <div class="container">
-    <header>
-      <h1 v-if="pageCategory">{{ pageCategory }}</h1>
-    </header>
+    <h1 v-html="formatPageCategory()"></h1>
     <div v-for="(videolist, i) in videos" :key="i">
       <ul v-if="videolist.length">
         <li v-for="video in videolist" :key="`_${video.id}`">
@@ -110,6 +108,16 @@ export default Vue.extend({
       const denominator = parseInt(ratio.split(":")[1]);
       return `${(denominator / numerator) * 100}%`;
     },
+    formatPageCategory() {
+      if (this.pageCategory.includes("/")) {
+        return this.pageCategory
+          .split("/")
+          .map(e => `<span>${e}</span>`)
+          .toString()
+          .replace(",", "/");
+      }
+      return this.pageCategory;
+    },
   },
 });
 </script>
@@ -119,13 +127,16 @@ export default Vue.extend({
 @import "~assets/scss/mixins.scss";
 @import "~assets/scss/utility.scss";
 
-header {
-  height: 301px;
-}
-
 h1 {
+  height: 301px;
   opacity: 0;
-  animation: fade-in 0.4s ease-out forwards;
+  animation: fade-in 0.5s ease-out forwards;
+  @include flex();
+  flex-wrap: wrap;
+  max-width: 100%;
+  @media screen and (max-width: 560px) {
+    font-size: 40px;
+  }
 }
 
 .container {

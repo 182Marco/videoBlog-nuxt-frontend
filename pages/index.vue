@@ -34,18 +34,18 @@ import Vue from "vue";
 import axios from "axios";
 
 export default Vue.extend({
-  async asyncData({ $axios }: any) {
-    const categories = await $axios.$get(
-      `${process.env.BASE_URL}/api/getCategories`
-    );
-    return { categories };
-  },
   name: "IndexPage",
   data: () => ({
     searched: [],
     searchedText: "",
     searchInput: false,
+    categories: [],
   }),
+  async fetch() {
+    this.categories = await fetch(
+      `${process.env.BASE_URL}/api/getCategories`
+    ).then(res => res.json());
+  },
   head: () => {
     return {
       title: "regista Fasoli-Homepage",

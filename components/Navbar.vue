@@ -84,7 +84,7 @@ export default Vue.extend({
     async delatRouteToOrClose(route?: string) {
       this.exitMobileMenuAnimate = true;
       route ? this.$router.push({ path: route }) : null;
-      await this.coloseMobile(600);
+      await this.coloseMobile(500);
       this.exitMobileMenuAnimate = false;
     },
     async coloseMobile(time: number = 0) {
