@@ -22,7 +22,7 @@
         <section
           class="icon-menu-mobile"
           @click="
-            isMenuMobileOpen ? delatRouteToOrClose() : (isMenuMobileOpen = true)
+            isMenuMobileOpen ? delayRouteToOrClose() : (isMenuMobileOpen = true)
           "
         >
           <IconMenuMobileClose
@@ -54,13 +54,13 @@
     <div class="menu-mobile" :class="{ visible: isMenuMobileOpen }">
       <ul :class="{ slideUpMore: exitMobileMenuAnimate }">
         <li>
-          <span><i @click="delatRouteToOrClose('/')">WORKS</i></span>
+          <span><i @click="delayRouteToOrClose('/')">WORKS</i></span>
         </li>
         <li>
-          <span><i @click="delatRouteToOrClose('/about')">ABOUT</i></span>
+          <span><i @click="delayRouteToOrClose('/about')">ABOUT</i></span>
         </li>
         <li>
-          <span><i @click="delatRouteToOrClose('/contacts')">CONTACT</i></span>
+          <span><i @click="delayRouteToOrClose('/contacts')">CONTACT</i></span>
         </li>
       </ul>
     </div>
@@ -81,7 +81,7 @@ export default Vue.extend({
     waitFor: (time: number) =>
       new Promise(resolve => setTimeout(resolve, time)),
     //
-    async delatRouteToOrClose(route?: string) {
+    async delayRouteToOrClose(route?: string) {
       this.exitMobileMenuAnimate = true;
       route ? this.$router.push({ path: route }) : null;
       await this.coloseMobile(500);
