@@ -14,7 +14,12 @@
           <span v-for="er in errors.email" :key="`er: ${er}`">{{ er }}</span>
         </p>
         <label for="msg">MESSAGGIO</label>
-        <textarea v-model="msg" id="msg" placeholder="Ciao Mirko..." required></textarea>
+        <textarea
+          v-model="msg"
+          id="msg"
+          placeholder="Ciao Mirko..."
+          required
+        ></textarea>
         <p>
           <span v-for="er in errors.msg" :key="`er: ${er}`">{{ er }}</span>
         </p>
@@ -101,7 +106,7 @@ p {
   margin: 4px 0 20px;
   height: 15px;
   span {
-    color: #ff0000;
+    color: $error;
   }
 }
 
