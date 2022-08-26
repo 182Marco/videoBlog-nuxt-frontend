@@ -4,19 +4,20 @@
       <h1>Contacts</h1>
       <form @submit.prevent="postForm">
         <label for="name">NOME</label>
-        <input type="text" v-model="name" required />
-        <div v-for="er in errors.name" :key="`er: ${er}`">{{ er }}</div>
+        <input type="text" v-model="name" />
+        <p>
+          <span v-for="er in errors.name" :key="`er: ${er}`">{{ er }}</span>
+        </p>
         <label for="name">LA TUA EMAIL</label>
-        <input type="email" v-model="email" required />
-        <div v-for="er in errors.email" :key="`er: ${er}`">{{ er }}</div>
+        <input type="email" v-model="email" />
+        <p>
+          <span v-for="er in errors.email" :key="`er: ${er}`">{{ er }}</span>
+        </p>
         <label for="msg">MESSAGGIO</label>
-        <textarea
-          v-model="msg"
-          id="msg"
-          required
-          placeholder="Ciao Mirko..."
-        ></textarea>
-        <div v-for="er in errors.email" :key="`er: ${er}`">{{ er }}</div>
+        <textarea v-model="msg" id="msg" placeholder="Ciao Mirko..."></textarea>
+        <p>
+          <span v-for="er in errors.msg" :key="`er: ${er}`">{{ er }}</span>
+        </p>
         <button type="submit" :disabled="sending">
           {{ sending ? "INVIANDO..." : "INVIA" }}
         </button>
@@ -41,6 +42,11 @@ export default Vue.extend({
       success: false,
       sending: false,
     };
+  },
+  watch: {
+    errors() {
+      console.log(this.errors);
+    },
   },
   methods: {
     async postForm() {
@@ -79,7 +85,10 @@ export default Vue.extend({
 main {
   background-color: $white;
   min-height: calc(100vh - 60px); // - footer mesure
-  * {
+  label,
+  input,
+  textarea,
+  h1 {
     color: $background;
   }
   input,
@@ -87,6 +96,15 @@ main {
     padding-left: 20px;
   }
 }
+
+p {
+  margin: 4px 0 20px;
+  height: 15px;
+  span {
+    color: #ff0000;
+  }
+}
+
 form {
   padding-bottom: 60px;
 }
@@ -101,13 +119,14 @@ label {
 input,
 textarea {
   min-width: 100%;
-  margin: 5px 0 30px;
+  margin-top: 5px;
   padding: 15px 20px;
   font-size: 20px;
 }
 
 textarea {
   height: 150px;
+  @include font(20px, 300, $background);
 }
 
 textarea:focus {

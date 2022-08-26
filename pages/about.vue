@@ -59,6 +59,7 @@ export default Vue.extend({
 
 .container {
   min-height: 100vh;
+  padding-bottom: 60px;
 }
 i {
   font-size: 30px;

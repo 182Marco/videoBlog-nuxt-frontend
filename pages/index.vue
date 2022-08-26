@@ -112,6 +112,9 @@ section {
       @media screen and (max-width: 740px) {
         font-size: 37px;
       }
+      @media screen and (max-width: 620px) {
+         opacity: 1;
+      }
       @media screen and (max-width: 570px) {
         font-size: 6vw;
       }
