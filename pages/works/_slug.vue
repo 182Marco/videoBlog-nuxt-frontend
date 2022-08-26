@@ -4,12 +4,7 @@
       <h1 v-if="pageCategory">{{ pageCategory }}</h1>
     </header>
     <div v-for="(videolist, i) in videos" :key="i">
-      <ul
-        v-if="videolist.length"
-        :style="{
-          gridTemplateColumns: `repeat(${videolist.length}, 1fr)`,
-        }"
-      >
+      <ul v-if="videolist.length">
         <li v-for="video in videolist" :key="`_${video.id}`">
           <figure :style="{ paddingTop: getPaddingTop(video.aspect_ratio) }">
             <iframe
@@ -54,7 +49,7 @@ export default Vue.extend({
       meta: [
         {
           hid: "Esposizizone dei lavori principali del regista Mirko Fasoli",
-          name: `Rigista Fasoli works by category`,
+          name: `Regista Fasoli lavori per categoria`,
           description: "Esposizizone dei lavori principali",
           content: "Esposizizone dei lavori principali",
         },
@@ -151,6 +146,7 @@ ul {
   display: grid;
   grid-gap: 30px;
   margin-bottom: 30px;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   figure {
     position: relative;
     overflow: hidden;

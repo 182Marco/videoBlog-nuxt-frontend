@@ -21,15 +21,17 @@
       <section>
         <section
           class="icon-menu-mobile"
-          @click="IsMenuMobileOpen = !IsMenuMobileOpen"
+          @click="
+            isMenuMobileOpen ? delatRouteToOrClose() : (isMenuMobileOpen = true)
+          "
         >
           <IconMenuMobileClose
             class="IconMenuMobileClose"
-            :class="{ visible: !IsMenuMobileOpen }"
+            :class="{ visible: !isMenuMobileOpen }"
           />
           <IconMenuMobileOpen
             class="IconMenuMobileOpen"
-            :class="{ visible: IsMenuMobileOpen }"
+            :class="{ visible: isMenuMobileOpen }"
           />
         </section>
         <ul class="social-links">
@@ -49,11 +51,17 @@
         </ul>
       </section>
     </nav>
-    <div class="menu-mobile" :class="{ visible: IsMenuMobileOpen }">
-      <ul>
-        <li><NuxtLink to="/"></NuxtLink></li>
-        <li><NuxtLink to="/about"></NuxtLink></li>
-        <li><NuxtLink to="/contacts"></NuxtLink></li>
+    <div class="menu-mobile" :class="{ visible: isMenuMobileOpen }">
+      <ul :class="{ slideUpMore: exitMobileMenuAnimate }">
+        <li>
+          <span><i @click="delatRouteToOrClose('/')">WORKS</i></span>
+        </li>
+        <li>
+          <span><i @click="delatRouteToOrClose('/about')">ABOUT</i></span>
+        </li>
+        <li>
+          <span><i @click="delatRouteToOrClose('/contacts')">CONTACT</i></span>
+        </li>
       </ul>
     </div>
   </div>
@@ -65,14 +73,25 @@ import Vue from "vue";
 export default Vue.extend({
   name: "Navbar",
   data: () => ({
-    IsMenuMobileOpen: false,
+    isMenuMobileOpen: false,
+    exitMobileMenuAnimate: false,
   }),
-  watch: {
-    $route() {
-      this.IsMenuMobileOpen = false;
+  methods: {
+    //
+    waitFor: (time: number) =>
+      new Promise(resolve => setTimeout(resolve, time)),
+    //
+    async delatRouteToOrClose(route?: string) {
+      this.exitMobileMenuAnimate = true;
+      route ? this.$router.push({ path: route }) : null;
+      await this.coloseMobile(600);
+      this.exitMobileMenuAnimate = false;
+    },
+    async coloseMobile(time: number = 0) {
+      await this.waitFor(time);
+      this.isMenuMobileOpen = false;
     },
   },
-  methods: {},
 });
 </script>
 
@@ -154,7 +173,6 @@ ul {
         }
       }
       i {
-        font-style: normal;
         font-size: 14px;
         height: 35px;
         position: absolute;
@@ -209,6 +227,7 @@ a {
   }
 }
 .menu-mobile {
+  cursor: pointer;
   z-index: 1;
   position: fixed;
   top: 0;
@@ -225,49 +244,59 @@ a {
     width: calc(100% - 40px);
     margin: 0 auto;
     height: 200px;
+    &.slideUpMore {
+      li:first-child {
+        animation: slideUpMore 0.2s ease-out forwards,
+          fadeOut 0.2s ease-out forwards;
+      }
+      li:nth-child(2) {
+        animation: slideUpMore 0.2s 0.15s ease-out forwards,
+          fadeOut 0.2s 0.15s ease-out forwards;
+      }
+      li:last-child {
+        animation: slideUpMore 0.2s 0.3s ease-out forwards,
+          fadeOut 0.2s 0.3s ease-out forwards;
+      }
+    }
     li {
       position: relative;
       height: 60px;
       overflow: hidden;
       &:first-child {
-        width: 127px;
-        a::after {
-          animation: slideUp 0.25s ease-out forwards,
+        width: 131px;
+        i {
+          animation: slideUp 0.2s ease-out forwards,
             fadeIn 0.5s ease-out forwards;
-          content: "WORKS";
         }
       }
       &:nth-child(2) {
-        width: 127px;
-        a::after {
+        width: 121px;
+        i {
           animation: slideUp 0.25s 0.2s ease-out forwards,
             fadeIn 0.5s 0.15s ease-out forwards;
-          content: "ABOUT";
         }
       }
       &:last-child {
-        width: 184px;
-        a::after {
+        width: 166px;
+        i {
           animation: slideUp 0.25s 0.4s ease-out forwards,
             fadeIn 0.5s 0.25s ease-out forwards;
-          content: "CONTACTS";
         }
       }
-      a,
-      a::after {
+      span,
+      i {
         position: absolute;
         top: 0;
         left: 0;
         display: block;
-      }
-      a {
-        width: 100%;
-        height: 82px;
         font-size: 35px;
-        &::after {
-          height: 41px;
-          top: 100%;
-        }
+      }
+      span {
+        width: 100%;
+        height: 164px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 35px;
       }
     }
   }
@@ -326,7 +355,17 @@ i {
     top: 100%;
   }
   100% {
-    top: 0;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
+
+@keyframes slideUpMore {
+  0% {
+    bottom: 0;
+  }
+  100% {
+    bottom:  80px;
   }
 }
 
@@ -339,6 +378,17 @@ i {
   }
   100% {
     opacity: 1;
+  }
+}
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  30% {
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 0;
   }
 }
 </style>

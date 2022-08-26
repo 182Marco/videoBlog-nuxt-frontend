@@ -58,7 +58,6 @@ export default Vue.extend({
 i {
   font-size: 30px;
   margin-right: 10px;
-  font-style: normal;
   display: inline-block;
   cursor: pointer;
   &:hover {
@@ -75,7 +74,7 @@ i {
     transform: scale(1.1, 0.9) translateY(0);
   }
   30% {
-    transform: scale(0.9, 1.1) translateY(-4px);
+    transform: scale(0.9, 1.1) translateY(-3px);
   }
   50% {
     transform: scale(1.1, 0.95) translateY(0);
