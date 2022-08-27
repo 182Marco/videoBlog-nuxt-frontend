@@ -18,10 +18,9 @@
           v-model="msg"
           id="msg"
           placeholder="Ciao Mirko..."
-          required
         ></textarea>
         <p>
-          <span v-for="er in errors.msg" :key="`er: ${er}`">{{ er }}</span>
+          <span v-for="er in errors.msg" :key="`er: ${er}`">{{ er.replace('msg', '"messaggio"') }}</span>
         </p>
         <button type="submit" :disabled="sending">
           {{ sending ? "INVIANDO..." : "INVIA" }}
@@ -47,11 +46,6 @@ export default Vue.extend({
       success: false,
       sending: false,
     };
-  },
-  watch: {
-    errors() {
-      console.log(this.errors);
-    },
   },
   methods: {
     async postForm() {
