@@ -3,6 +3,11 @@
     <div class="container">
       <h1>Contacts</h1>
       <form @submit.prevent="postForm">
+        <section>
+          <h2 for="msg">TELEFONO:</h2>
+          <span>{{ phoneNumber[0] }}</span>
+        </section>
+        <h2>SCRIVI UN MESSAGGIO:</h2>
         <label for="name">NOME</label>
         <input type="text" v-model="name" required />
         <p>
@@ -21,7 +26,9 @@
           required
         ></textarea>
         <p>
-          <span v-for="er in errors.msg" :key="`er: ${er}`">{{ er.replace('msg', '"messaggio"') }}</span>
+          <span v-for="er in errors.msg" :key="`er: ${er}`">{{
+            er.replace("msg", '"messaggio"')
+          }}</span>
         </p>
         <button type="submit" :disabled="sending">
           {{ sending ? "INVIANDO..." : "INVIA" }}
@@ -46,7 +53,13 @@ export default Vue.extend({
       errors: {},
       success: false,
       sending: false,
+      phoneNumber: "",
     };
+  },
+  async fetch() {
+    this.phoneNumber = await fetch(
+      `${process.env.BASE_URL}/api/phoneNumber`
+    ).then(res => res.json());
   },
   methods: {
     async postForm() {
@@ -88,7 +101,9 @@ main {
   label,
   input,
   textarea,
-  h1 {
+  span,
+  h1,
+  h2 {
     color: $background;
   }
   input,
@@ -97,8 +112,24 @@ main {
   }
 }
 
+h2 {
+  font-size: 20px;
+  margin-bottom: 30px;
+}
+
+span,
+h2 {
+  font-size: 20px;
+}
+
+section {
+  h2 {
+    margin-bottom: 0;
+  }
+}
+
 p {
-  margin: 4px 0 20px;
+  margin: 4px 0 15px;
   height: 15px;
   span {
     color: $error;
@@ -114,6 +145,14 @@ button {
 }
 label {
   font-weight: 500;
+}
+
+section {
+  margin-bottom: 50px;
+  @include flex(row, flex-start);
+  span {
+    margin-left: 7px;
+  }
 }
 
 input,
