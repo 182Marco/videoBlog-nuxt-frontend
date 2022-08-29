@@ -109,6 +109,7 @@ section {
       transition: opacity 0.3s ease-out;
       white-space: nowrap;
       font-size: 43px;
+      font-weight: 700;
       @media screen and (max-width: 740px) {
         font-size: 37px;
       }
