@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <h1>About</h1>
-    <i @click="en = rue">🇬🇧</i><i @click="en = false">🇮🇹</i>
+    <i @click="en = true">🇬🇧</i><i @click="en = false">🇮🇹</i>
     <div v-if="en" class="text" v-html="bio.en"></div>
     <div v-else class="text" v-html="bio.ita"></div>
   </div>
@@ -35,6 +35,7 @@ export default Vue.extend({
 
 .container {
   min-height: 100vh;
+  border: 1px solid red;
   padding-bottom: 40px;
 }
 i {
@@ -49,7 +50,7 @@ i {
 }
 
 .text {
-  height: 500px;
+  min-height: 500px;
   margin-top: 20px;
   font-size: 20px;
   line-height: 136%;
