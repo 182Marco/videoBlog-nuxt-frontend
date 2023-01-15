@@ -74,6 +74,13 @@ export default {
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
 
+  image: {
+    domains: [
+    'localhost:8000', 
+    'api-mirkofasolifilmmaker.visualfarm.it',
+    'localhost']
+  },
+
   env: {
     baseUrl: process.env.BASE_URL,
     // || "http://localhost:3000",
