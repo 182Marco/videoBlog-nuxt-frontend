@@ -10,16 +10,26 @@ export default {
     meta: [
       { charset: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { hid: "Sito di Mirko Fasoli con esposizione dei lavori più importanti e contatti", name: "VideoBlog Mirko Fasoli", content: "Sito di Mirko Fasoli con esposizione dei lavori più importanti e contatti" },
+      {
+        hid: "Sito di Mirko Fasoli con esposizione dei lavori più importanti e contatti",
+        name: "VideoBlog Mirko Fasoli",
+        content:
+          "Sito di Mirko Fasoli con esposizione dei lavori più importanti e contatti",
+      },
       { name: "format-detection", content: "telephone=no" },
     ],
     link: [
       { rel: "icon", type: "image/x-icon", href: "/kFavicon32.ico" },
-      { rel:"stylesheet", href:"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css", integrity:"sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==", crossorigin:"anonymous", referrerpolicy:"no-referrer" }
-     ],
+      {
+        rel: "stylesheet",
+        href: "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css",
+        integrity:
+          "sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==",
+        crossorigin: "anonymous",
+        referrerpolicy: "no-referrer",
+      },
+    ],
   },
-
-
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
@@ -44,16 +54,16 @@ export default {
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
-    "@nuxt/typescript-build", 
+    "@nuxt/typescript-build",
     "@nuxt/image",
     "@nuxtjs/fontawesome",
   ],
   fontawesome: {
-    component: 'fa',
+    component: "fa",
     icons: {
-      solid: ['faEnvelope'],
+      solid: ["faEnvelope"],
       brands: [],
-    }
+    },
   },
 
   types: ["@types/node", "@nuxt/types", "@nuxtjs/axios"],
@@ -66,10 +76,7 @@ export default {
 
   // Modules: https://go.nuxtjs.dev/config-modules
 
-  modules: [
-    "@nuxtjs/axios",
-    "@nuxtjs/dotenv",
-  ],
+  modules: ["@nuxtjs/axios", "@nuxtjs/dotenv", "@nuxt/image"],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
